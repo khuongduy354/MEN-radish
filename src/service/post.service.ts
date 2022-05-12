@@ -1,10 +1,7 @@
-import { Request, Response } from "express";
-import Post from "../models/product.model";
-import { PostDocument } from "../types";
+import { Post } from "../models/post.model";
 
-const createProduct = async (input: PostDocument) => {
+const createProduct = async () => {
   try {
-    Post.create(input);
   } catch (e) {}
 };
 const getProduct = async () => {
