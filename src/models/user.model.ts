@@ -29,16 +29,7 @@ const userSchema = new mongoose.Schema(
         default: "null",
       },
     },
-    karmaPoints: {
-      postKarma: {
-        type: Number,
-        default: 0,
-      },
-      commentKarma: {
-        type: Number,
-        default: 0,
-      },
-    },
+
     posts: [
       {
         type: mongoose.Schema.Types.ObjectId,

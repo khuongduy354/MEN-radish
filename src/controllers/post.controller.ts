@@ -44,7 +44,10 @@ const createPost = async (req: Request, res: Response) => {
 const getPost = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
-    const post = await Post.findById(id);
+    const post = await Post.findById(id)
+      .populate("author", "username")
+      .populate("subreddit", "subredditName")
+      .populate("comments");
     res.status(200).json({ data: post });
   } catch (e) {}
 };
@@ -115,20 +118,38 @@ const deletePost = async (req: Request, res: Response) => {
 };
 const getSubscribedPosts = async (req: Request, res: Response) => {
   try {
-    const { username } = req.params;
-    // const posts = await Post.find({ : username });
-    // res.json({ data: posts });
+    const username = req.username;
+    const user = await User.findOne({ username }).populate("subscribedSubs");
+    const posts = await Post.find({
+      _id: { $in: user.subscribedSubs },
+    })
+      .select("-comments")
+      .populate("author", "username")
+      .populate("subreddit", "subredditName");
+
+    res.status(200).json({ data: posts });
   } catch (e) {}
 };
 
 const upvotePost = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
-    const post = await Post.findByIdAndUpdate(
-      id,
-      { $inc: { upvotes: 1 } },
-      { new: true }
-    );
+    const user = await User.findOne({ username: req.username });
+    const post = await Post.findById(id);
+    //if user has already upvoted, remove upvote
+    if (post.upvotedBy.includes(user._id)) {
+      post.upvotedBy = post.upvotedBy.filter(
+        (userId: any) => userId !== user._id
+      );
+      await post.save();
+    } else {
+      post.upvotedBy.push(user._id);
+      //remove downvote if upvote
+      post.downvotedBy = post.downvotedBy.filter(
+        (userId: any) => userId !== user._id
+      );
+      await post.save();
+    }
     res.status(200).json({ data: post });
   } catch (e) {}
 };
@@ -136,11 +157,22 @@ const upvotePost = async (req: Request, res: Response) => {
 const downvotePost = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
-    const post = await Post.findByIdAndUpdate(
-      id,
-      { $inc: { downvote: 1 } },
-      { new: true }
-    );
+    const user = await User.findOne({ username: req.username });
+    const post = await Post.findById(id);
+    //if user has already downvoted, remove downvote
+    if (post.downvotedBy.includes(user._id)) {
+      post.downvotedBy = post.downvotedBy.filter(
+        (userId: any) => userId !== user._id
+      );
+      await post.save();
+    } else {
+      post.downvotedBy.push(user._id);
+      //remove upvote if downvote
+      post.upvotedBy = post.upvotedBy.filter(
+        (userId: any) => userId !== user._id
+      );
+      await post.save();
+    }
     res.status(200).json({ data: post });
   } catch (e) {}
 };
@@ -151,8 +183,8 @@ export default {
   getPostsOnSearch,
   getAllPosts,
   deletePost, //☑️
-  getPost,
-  getSubscribedPosts,
-  downvotePost,
-  upvotePost,
+  getPost, // ☑️
+  getSubscribedPosts, //☑️
+  downvotePost, //☑️
+  upvotePost, //☑️
 };

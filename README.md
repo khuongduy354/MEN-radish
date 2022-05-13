@@ -1,8 +1,10 @@
 # Todo 
 
 - implement cloudinary buffer + multer 
-- implement mongodb pagination
+- implement pagination
 - typing for models 
+- implement ranking ?
+- 
 
 # Learned 
 - index.d.ts includes custom property for request
@@ -13,5 +15,5 @@ or should I get username from token ?
 - typing for model is hella important 
 
 - use save() for updating mongodb, lean() for query, populate for references  
+- mongodb query operator ($)
 # Progress 
-- User done except avatar (requires cloudinary setup)
