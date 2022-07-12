@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { IPost } from "../types/IPost";
 
 const commentSchema = new mongoose.Schema(
   {
@@ -75,4 +76,4 @@ const postSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-export const Post = mongoose.model("Post", postSchema);
+export const Post = mongoose.model<IPost>("Post", postSchema);

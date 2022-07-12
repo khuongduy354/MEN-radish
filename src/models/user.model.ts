@@ -1,3 +1,4 @@
+import { IUser } from "./../types/IUser";
 import mongoose from "mongoose";
 
 const userSchema = new mongoose.Schema(
@@ -42,14 +43,10 @@ const userSchema = new mongoose.Schema(
         ref: "Subreddit",
       },
     ],
-    totalComments: {
-      type: Number,
-      default: 0,
-    },
   },
   {
     timestamps: true,
   }
 );
 
-export const User = mongoose.model("User", userSchema);
+export const User = mongoose.model<IUser>("User", userSchema);

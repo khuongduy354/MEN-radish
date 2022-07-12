@@ -1,3 +1,4 @@
+import { ISubreddit } from "./../types/ISubreddit";
 import mongoose from "mongoose";
 const subredditSchema = new mongoose.Schema(
   {
@@ -28,14 +29,13 @@ const subredditSchema = new mongoose.Schema(
         ref: "User",
       },
     ],
-    subscriberCount: {
-      type: Number,
-      default: 1,
-    },
   },
   {
     timestamps: true,
   }
 );
 
-export const Subreddit = mongoose.model("Subreddit", subredditSchema);
+export const Subreddit = mongoose.model<ISubreddit>(
+  "Subreddit",
+  subredditSchema
+);
