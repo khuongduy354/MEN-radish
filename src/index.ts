@@ -1,6 +1,9 @@
+import { errorHandler } from "./error";
+import { logger } from "./config/logger";
 //boostrap expressjs
 import express, { Request, Response } from "express";
 import "dotenv/config";
+
 const PORT = process.env.PORT || 3000;
 const app = express();
 app.use(express.json());
@@ -11,20 +14,19 @@ app.get("/helloworld", (req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log("Server is running on port " + PORT.toString());
+  logger.info("Server is running on port " + PORT.toString());
 });
 
 // Error handling
 app.use((err: Error, req: Request, res: Response) => {
-  console.error(err.stack);
-  res.status(500).json({ message: "Internal Error" });
+  err && errorHandler.handleError(err, res);
+});
+
+process.on("unhandledRejection", (e) => {
+  throw e;
 });
 
 process.on("uncaughtException", (e) => {
-  console.log(e);
-  process.exit(1);
-});
-process.on("unhandledRejection", (e) => {
-  console.log(e);
-  process.exit(1);
+  errorHandler.handleError(e);
+  !errorHandler.isTrustedError(e) && process.exit(1);
 });
