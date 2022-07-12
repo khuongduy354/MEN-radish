@@ -1,6 +1,7 @@
 import { ObjectId } from "mongoose";
 
 export interface ISubreddit {
+  _id: ObjectId;
   subredditName: string;
   description: string;
   posts: Array<ObjectId>;

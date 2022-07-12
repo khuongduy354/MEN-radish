@@ -1,7 +1,8 @@
 import mongoose, { ObjectId } from "mongoose";
 import { IComment } from "./IComment";
 
-export interface IPost extends mongoose.Document {
+export interface IPost {
+  _id: ObjectId;
   title: String;
   textSubmission: String;
   linkSubmission: String;

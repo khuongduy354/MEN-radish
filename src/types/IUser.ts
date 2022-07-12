@@ -5,9 +5,10 @@ type Avatar = {
   imageLink: string;
   imageId: string;
 };
-export interface IUser extends mongoose.Document {
+export interface IUser {
+  _id: ObjectId;
   email: string;
-  name: string;
+  username: string;
   passwordHash: string;
   avatar: Avatar;
   posts: Array<ObjectId>;
