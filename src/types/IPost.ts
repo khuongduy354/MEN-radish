@@ -1,12 +1,6 @@
 import mongoose, { ObjectId } from "mongoose";
-type Comment = {
-  commentedBy: ObjectId;
-  commentBody: String;
-  upvotedBy: Array<ObjectId>;
-  downvotedBy: Array<ObjectId>;
-  createdAt: Date;
-  updatedAt: Date;
-};
+import { IComment } from "./IComment";
+
 export interface IPost extends mongoose.Document {
   title: String;
   textSubmission: String;
@@ -17,7 +11,7 @@ export interface IPost extends mongoose.Document {
   author: ObjectId;
   upvotedBy: Array<ObjectId>;
   downvotedBy: Array<ObjectId>;
-  comments: Array<Comment>;
+  comments: Array<IComment>;
   createdAt: Date;
   updatedAt: Date;
 }

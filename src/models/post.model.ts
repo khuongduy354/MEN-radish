@@ -1,31 +1,6 @@
 import mongoose from "mongoose";
 import { IPost } from "../types/IPost";
-
-const commentSchema = new mongoose.Schema(
-  {
-    commentedBy: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
-    },
-    commentBody: {
-      type: String,
-      trim: true,
-    },
-    upvotedBy: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "User",
-      },
-    ],
-    downvotedBy: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "User",
-      },
-    ],
-  },
-  { timestamps: true }
-);
+import { Comment } from "./comment.model";
 
 const postSchema = new mongoose.Schema(
   {
@@ -71,7 +46,7 @@ const postSchema = new mongoose.Schema(
         ref: "User",
       },
     ],
-    comments: [commentSchema],
+    comments: [Comment],
   },
   { timestamps: true }
 );
