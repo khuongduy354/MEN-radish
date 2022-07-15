@@ -1,28 +1,61 @@
-import { Request, Response } from "express";
-import { FilterQuery } from "mongoose";
+import bcrypt from "bcrypt";
+import { AppError } from "../error";
+import { createJWT } from "../helper/jwtTool";
+import { User } from "../models/user.model";
 
-const signupAccount = async () => {
+const signupAccount = async (username: string, password: string) => {
   try {
-  } catch (e) {}
+    //hash password
+    const passwordHash = await bcrypt.hash(password, 10);
+    //create new user
+    const user = await User.create({ username, passwordHash });
+    return user;
+  } catch (e) {
+    throw e;
+  }
 };
-const signInAccount = async () => {
+const signInAccount = async (username: string, password: string) => {
   try {
-  } catch (e) {}
-};
+    //get user
+    const user = await User.findOne({ username });
+    if (!user) throw new AppError(404, "User not found");
 
-const getUserFromEmail = async () => {
-  try {
-  } catch (e) {}
+    //validate password
+    const isValidPassword = await bcrypt.compare(password, user.passwordHash);
+    if (!isValidPassword) throw new AppError(401, "Invalid Password ");
+
+    //create new token
+    user.token = createJWT({ username: user.username });
+    return user;
+  } catch (e) {
+    throw e;
+  }
 };
 
 const updateUser = async () => {
   try {
   } catch (e) {}
 };
+const getUser = async (query: number | string) => {
+  try {
+    //prepare query
+    const userQuery = {
+      [typeof query === "number" ? "_id" : "username"]: query,
+    };
+
+    //get user
+    const user = await User.findOne(userQuery).lean();
+    if (!user) throw new AppError(404, "User not found");
+
+    return user;
+  } catch (e) {
+    throw e;
+  }
+};
 
 export default {
   signupAccount,
-  getUserFromEmail,
   updateUser,
   signInAccount,
+  getUser,
 };

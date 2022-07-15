@@ -11,6 +11,7 @@ export interface IUser {
   username: string;
   passwordHash: string;
   avatar: Avatar;
+  token: string;
   posts: Array<ObjectId>;
   subscribedSubs: Array<ObjectId>;
   createdAt: Date;
