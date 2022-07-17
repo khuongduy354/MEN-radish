@@ -77,9 +77,7 @@ const upvoteComment = async (upvoteCommentProp: upvoteCommentProp) => {
 
     if (!targetComment.upvotedBy.includes(user._id)) {
       targetComment.upvotedBy.push(user._id);
-    }
-
-    if (targetComment.upvotedBy.includes(user._id)) {
+    } else {
       targetComment.upvotedBy = targetComment.upvotedBy.filter(
         (_userId) => _userId !== user._id
       );
