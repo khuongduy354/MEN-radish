@@ -1,8 +1,9 @@
-import { errorHandler } from "./error";
+import { AppError, errorHandler } from "./error";
 import { logger } from "./config/logger";
 //boostrap expressjs
-import express, { Request, Response } from "express";
+import express, { NextFunction, Request, Response } from "express";
 import "dotenv/config";
+import mongoose from "mongoose";
 
 const PORT = process.env.PORT || 3000;
 const app = express();
@@ -17,11 +18,13 @@ app.listen(PORT, () => {
   logger.info("Server is running on port " + PORT.toString());
 });
 
-// Error handling
-app.use((err: Error, req: Request, res: Response) => {
+// Error response
+app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
   err && errorHandler.handleError(err, res);
+  !errorHandler.isTrustedError(err) && process.exit(1);
 });
 
+//uncaught error/rejection
 process.on("unhandledRejection", (e) => {
   throw e;
 });
