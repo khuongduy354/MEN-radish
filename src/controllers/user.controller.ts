@@ -40,17 +40,16 @@ const signInAccount = async (
 const getUser = async (req: Request, res: Response, next: NextFunction) => {
   try {
     //prepare query
-    const { userId, userEmail } = req.query;
+    const { isId, userQuery } = req.query;
     let query: string | number;
 
-    if (userId && !isNaN(Number(userId))) {
-      query = Number(userId);
-    } else if (userEmail) {
-      query = userEmail.toString();
+    if (isId && !isNaN(Number(userQuery))) {
+      query = Number(userQuery);
+    } else if (!isId && userQuery) {
+      query = userQuery.toString();
     } else {
-      throw new AppError(400, "Bad request");
+      throw new AppError(400, "Invalid query");
     }
-
     //pass to service
     const user = await UserService.getUser(query);
 
