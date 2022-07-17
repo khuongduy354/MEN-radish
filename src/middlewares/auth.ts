@@ -19,8 +19,10 @@ export const auth = async (req: Request, res: Response, next: NextFunction) => {
     const username = (parsedToken as JwtPayload).username;
 
     //ensures user exists
-    if (await User.exists({ username })) {
+    const user = await User.findOne({ username });
+    if (user) {
       req.username = username;
+      req.userId = user._id;
       next();
     } else {
       next(new AppError(401, "Invalid token"));
