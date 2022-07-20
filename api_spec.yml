@@ -8,7 +8,7 @@ tags:
   - name: Post
   - name: Subreddit
   - name: User
-  - name: Comments
+  - name: Comment
 paths:
   /v1/posts:
     get:
@@ -30,35 +30,13 @@ paths:
           description: Successful response
           content:
             application/json: {}
-  /v1/post/{id}:
+  /v1/posts/{post_id}:
     get:
       tags:
         - Post
       summary: Get one detailed post
       parameters:
-        - name: id
-          in: path
-          schema:
-            type: string
-          required: true
-      responses:
-        '200':
-          description: Successful response
-          content:
-            application/json: {}
-    put:
-      tags:
-        - Post
-      summary: Update post
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              example:
-                token: token
-      parameters:
-        - name: id
+        - name: post_id
           in: path
           schema:
             type: string
@@ -73,7 +51,7 @@ paths:
         - Post
       summary: Delete post
       parameters:
-        - name: id
+        - name: post_id
           in: path
           schema:
             type: string
@@ -83,7 +61,7 @@ paths:
           description: Successful response
           content:
             application/json: {}
-  /v1/posts/subscribed/{username}:
+  /v1/me/posts/subscribed:
     get:
       tags:
         - Post
@@ -94,11 +72,6 @@ paths:
           schema:
             type: string
           example: token here
-        - name: username
-          in: path
-          schema:
-            type: string
-          required: true
       responses:
         '200':
           description: Successful response
@@ -116,20 +89,27 @@ paths:
               type: object
               example:
                 token: ''
+                title: ''
+                subreddit_id: '{{subreddit_id}}'
       responses:
         '200':
           description: Successful response
           content:
             application/json: {}
-  /v1/post/upvote/{id}:
-    post:
+  /v1/post/{post_id}:
+    put:
       tags:
         - Post
-      summary: Upvote post
+      summary: Update post
       requestBody:
-        content: {}
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                token: token
       parameters:
-        - name: id
+        - name: post_id
           in: path
           schema:
             type: string
@@ -139,7 +119,25 @@ paths:
           description: Successful response
           content:
             application/json: {}
-  /v1/post/downvote/{id}:
+  /v1/post/{post_id}/upvote:
+    post:
+      tags:
+        - Post
+      summary: Upvote post
+      requestBody:
+        content: {}
+      parameters:
+        - name: post_id
+          in: path
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /v1/post/{post_id}/downvote:
     post:
       tags:
         - Post
@@ -147,7 +145,7 @@ paths:
       requestBody:
         content: {}
       parameters:
-        - name: id
+        - name: post_id
           in: path
           schema:
             type: string
@@ -167,13 +165,13 @@ paths:
           description: Successful response
           content:
             application/json: {}
-  /v1/subreddit/{subredditName}:
+  /v1/subreddit/{subreddit_id}:
     get:
       tags:
         - Subreddit
       summary: Get one detailed subreddit
       parameters:
-        - name: subredditName
+        - name: subreddit_id
           in: path
           schema:
             type: string
@@ -196,29 +194,7 @@ paths:
                 token: token
                 description: ''
       parameters:
-        - name: subredditName
-          in: path
-          schema:
-            type: string
-          required: true
-      responses:
-        '200':
-          description: Successful response
-          content:
-            application/json: {}
-    post:
-      tags:
-        - Subreddit
-      summary: Subscribe subreddit
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              example:
-                token: ''
-      parameters:
-        - name: subredditName
+        - name: subreddit_id
           in: path
           schema:
             type: string
@@ -247,7 +223,30 @@ paths:
           description: Successful response
           content:
             application/json: {}
-  /v1/user/signup:
+  /v1/subreddits/{subreddit_id}:
+    post:
+      tags:
+        - Subreddit
+      summary: Subscribe subreddit
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                token: ''
+      parameters:
+        - name: subreddit_id
+          in: path
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /v1/me/signup:
     post:
       tags:
         - User
@@ -265,7 +264,7 @@ paths:
           description: Successful response
           content:
             application/json: {}
-  /v1/user/login:
+  /v1/me/login:
     post:
       tags:
         - User
@@ -289,38 +288,39 @@ paths:
           description: Successful response
           content:
             application/json: {}
-  /v1/users/{username}:
+  /v1/user:
     get:
       tags:
         - User
       summary: Get User
       parameters:
-        - name: username
-          in: path
+        - name: isId
+          in: query
           schema:
-            type: string
-          required: true
+            type: boolean
+          example: 'true'
       responses:
         '200':
           description: Successful response
           content:
             application/json: {}
-  /v1/users/avatar:
-    post:
+  /v1/me:
+    patch:
       tags:
         - User
-      summary: Upload Avatar
+      summary: Update User
       requestBody:
         content:
           multipart/form-data:
             schema:
               type: object
               properties:
+                username:
+                  type: string
+                  example: '{{username}}'
                 avatar:
                   type: string
                   format: binary
-                username:
-                  type: string
       responses:
         '200':
           description: Successful response
@@ -329,21 +329,11 @@ paths:
   /v1/comments/{comment_id}/downvote:
     post:
       tags:
-        - Comments
+        - Comment
       summary: Downvote Comment
       requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              example:
-                author: username
+        content: {}
       parameters:
-        - name: postId
-          in: query
-          schema:
-            type: string
-          example: '{{postId}}'
         - name: comment_id
           in: path
           schema:
@@ -357,16 +347,26 @@ paths:
   /v1/comments/{comment_id}:
     patch:
       tags:
-        - Comments
+        - Comment
       summary: Edit comment
       requestBody:
         content: {}
       parameters:
-        - name: postId
-          in: query
+        - name: comment_id
+          in: path
           schema:
             type: string
-          example: '{{postId}}'
+          required: true
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    delete:
+      tags:
+        - Comment
+      summary: Delete comment
+      parameters:
         - name: comment_id
           in: path
           schema:
@@ -380,7 +380,7 @@ paths:
   /v1/comments/{comment_id}/upvote:
     post:
       tags:
-        - Comments
+        - Comment
       summary: Upvote comment
       requestBody:
         content:
@@ -390,11 +390,6 @@ paths:
               example:
                 author: username
       parameters:
-        - name: postId
-          in: query
-          schema:
-            type: string
-          example: '{{postId}}'
         - name: comment_id
           in: path
           schema:
@@ -405,10 +400,10 @@ paths:
           description: Successful response
           content:
             application/json: {}
-  /v1/post/{post_id}/comment:
+  /v1/posts/{post_id}/comment:
     post:
       tags:
-        - Comments
+        - Comment
       summary: Comment post
       requestBody:
         content:
@@ -416,26 +411,14 @@ paths:
             schema:
               type: object
               example:
-                author: username
                 content: asdfs
       parameters:
-        - name: post_id
-          in: path
+        - name: Authorization
+          in: header
           schema:
             type: string
-          required: true
-      responses:
-        '200':
-          description: Successful response
-          content:
-            application/json: {}
-  /v1/post/comment/{comment_id}:
-    delete:
-      tags:
-        - Comments
-      summary: Delete comment
-      parameters:
-        - name: comment_id
+          example: '{{token}}'
+        - name: post_id
           in: path
           schema:
             type: string

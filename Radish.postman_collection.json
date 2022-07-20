@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "fb14aa07-4f56-4248-ad2c-884285edcf57",
+		"_postman_id": "bfc4004b-8e87-4fae-87a4-b44b57a301ff",
 		"name": "Radish",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "17922492"
@@ -15,9 +15,9 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{BASE_URL}}/v1/posts",
+							"raw": "{{base_url}}/v1/posts",
 							"host": [
-								"{{BASE_URL}}"
+								"{{base_url}}"
 							],
 							"path": [
 								"v1",
@@ -33,9 +33,9 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{BASE_URL}}/v1/post/search",
+							"raw": "{{base_url}}/v1/post/search",
 							"host": [
-								"{{BASE_URL}}"
+								"{{base_url}}"
 							],
 							"path": [
 								"v1",
@@ -52,20 +52,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{BASE_URL}}/v1/post/:id",
+							"raw": "{{base_url}}/v1/posts/%7B%7Bpost_id%7D%7D",
 							"host": [
-								"{{BASE_URL}}"
+								"{{base_url}}"
 							],
 							"path": [
 								"v1",
-								"post",
-								":id"
-							],
-							"variable": [
-								{
-									"key": "id",
-									"value": null
-								}
+								"posts",
+								"%7B%7Bpost_id%7D%7D"
 							]
 						}
 					},
@@ -78,26 +72,19 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "token here",
-								"type": "text"
+								"value": "token here"
 							}
 						],
 						"url": {
-							"raw": "{{BASE_URL}}/v1/posts/subscribed/:username",
+							"raw": "{{base_url}}/v1/me/posts/subscribed",
 							"host": [
-								"{{BASE_URL}}"
+								"{{base_url}}"
 							],
 							"path": [
 								"v1",
+								"me",
 								"posts",
-								"subscribed",
-								":username"
-							],
-							"variable": [
-								{
-									"key": "username",
-									"value": null
-								}
+								"subscribed"
 							]
 						}
 					},
@@ -110,7 +97,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"token\":\"\"\r\n   \r\n}",
+							"raw": "{\n    \"token\":\"\",\n    \"title\":\"\",\n    \"subreddit_id\":\"{{subreddit_id}}\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -118,9 +105,9 @@
 							}
 						},
 						"url": {
-							"raw": "{{BASE_URL}}/v1/post",
+							"raw": "{{base_url}}/v1/post",
 							"host": [
-								"{{BASE_URL}}"
+								"{{base_url}}"
 							],
 							"path": [
 								"v1",
@@ -137,7 +124,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"token\":\"token\"\r\n}",
+							"raw": "{\n    \"token\":\"token\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -145,20 +132,14 @@
 							}
 						},
 						"url": {
-							"raw": "{{BASE_URL}}/v1/post/:id",
+							"raw": "{{base_url}}/v1/post/%7B%7Bpost_id%7D%7D",
 							"host": [
-								"{{BASE_URL}}"
+								"{{base_url}}"
 							],
 							"path": [
 								"v1",
 								"post",
-								":id"
-							],
-							"variable": [
-								{
-									"key": "id",
-									"value": null
-								}
+								"%7B%7Bpost_id%7D%7D"
 							]
 						}
 					},
@@ -171,7 +152,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"token\":\"\"\r\n}",
+							"raw": "{\n    \"token\":\"\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -179,20 +160,14 @@
 							}
 						},
 						"url": {
-							"raw": "{{BASE_URL}}/v1/post/:id",
+							"raw": "{{base_url}}/v1/posts/%7B%7Bpost_id%7D%7D",
 							"host": [
-								"{{BASE_URL}}"
+								"{{base_url}}"
 							],
 							"path": [
 								"v1",
-								"post",
-								":id"
-							],
-							"variable": [
-								{
-									"key": "id",
-									"value": null
-								}
+								"posts",
+								"%7B%7Bpost_id%7D%7D"
 							]
 						}
 					},
@@ -204,21 +179,15 @@
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "{{BASE_URL}}/v1/post/upvote/:id",
+							"raw": "{{base_url}}/v1/post/%7B%7Bpost_id%7D%7D/upvote",
 							"host": [
-								"{{BASE_URL}}"
+								"{{base_url}}"
 							],
 							"path": [
 								"v1",
 								"post",
-								"upvote",
-								":id"
-							],
-							"variable": [
-								{
-									"key": "id",
-									"value": null
-								}
+								"%7B%7Bpost_id%7D%7D",
+								"upvote"
 							]
 						}
 					},
@@ -230,21 +199,15 @@
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "{{BASE_URL}}/v1/post/downvote/:id",
+							"raw": "{{base_url}}/v1/post/%7B%7Bpost_id%7D%7D/downvote",
 							"host": [
-								"{{BASE_URL}}"
+								"{{base_url}}"
 							],
 							"path": [
 								"v1",
 								"post",
-								"downvote",
-								":id"
-							],
-							"variable": [
-								{
-									"key": "id",
-									"value": null
-								}
+								"%7B%7Bpost_id%7D%7D",
+								"downvote"
 							]
 						}
 					},
@@ -261,9 +224,9 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{BASE_URL}}/v1/subreddits",
+							"raw": "{{base_url}}/v1/subreddits",
 							"host": [
-								"{{BASE_URL}}"
+								"{{base_url}}"
 							],
 							"path": [
 								"v1",
@@ -279,20 +242,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{BASE_URL}}/v1/subreddit/:subredditName",
+							"raw": "{{base_url}}/v1/subreddit/%7B%7Bsubreddit_id%7D%7D",
 							"host": [
-								"{{BASE_URL}}"
+								"{{base_url}}"
 							],
 							"path": [
 								"v1",
 								"subreddit",
-								":subredditName"
-							],
-							"variable": [
-								{
-									"key": "subredditName",
-									"value": null
-								}
+								"%7B%7Bsubreddit_id%7D%7D"
 							]
 						}
 					},
@@ -305,7 +262,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"token\":\"\",\r\n    \"name\":\"\",\r\n    \"description\":\"\"\r\n}",
+							"raw": "{\n    \"token\":\"\",\n    \"name\":\"\",\n    \"description\":\"\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -313,9 +270,9 @@
 							}
 						},
 						"url": {
-							"raw": "{{BASE_URL}}/v1/subreddit",
+							"raw": "{{base_url}}/v1/subreddit",
 							"host": [
-								"{{BASE_URL}}"
+								"{{base_url}}"
 							],
 							"path": [
 								"v1",
@@ -332,7 +289,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"token\":\"token\",\r\n    \"description\":\"\"\r\n}",
+							"raw": "{\n    \"token\":\"token\",\n    \"description\":\"\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -340,20 +297,14 @@
 							}
 						},
 						"url": {
-							"raw": "{{BASE_URL}}/v1/subreddit/:subredditName",
+							"raw": "{{base_url}}/v1/subreddit/%7B%7Bsubreddit_id%7D%7D",
 							"host": [
-								"{{BASE_URL}}"
+								"{{base_url}}"
 							],
 							"path": [
 								"v1",
 								"subreddit",
-								":subredditName"
-							],
-							"variable": [
-								{
-									"key": "subredditName",
-									"value": null
-								}
+								"%7B%7Bsubreddit_id%7D%7D"
 							]
 						}
 					},
@@ -366,7 +317,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"token\": \"\"\r\n}",
+							"raw": "{\n    \"token\": \"\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -374,20 +325,14 @@
 							}
 						},
 						"url": {
-							"raw": "{{BASE_URL}}/v1/subreddit/:subredditName",
+							"raw": "{{base_url}}/v1/subreddits/%7B%7Bsubreddit_id%7D%7D",
 							"host": [
-								"{{BASE_URL}}"
+								"{{base_url}}"
 							],
 							"path": [
 								"v1",
-								"subreddit",
-								":subredditName"
-							],
-							"variable": [
-								{
-									"key": "subredditName",
-									"value": null
-								}
+								"subreddits",
+								"%7B%7Bsubreddit_id%7D%7D"
 							]
 						}
 					},
@@ -405,7 +350,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\":\"someone\",\r\n    \"password\":\"something\"\r\n}",
+							"raw": "{\n    \"username\":\"someone\",\n    \"password\":\"something\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -413,13 +358,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{BASE_URL}}/v1/user/signup",
+							"raw": "{{base_url}}/v1/me/signup",
 							"host": [
-								"{{BASE_URL}}"
+								"{{base_url}}"
 							],
 							"path": [
 								"v1",
-								"user",
+								"me",
 								"signup"
 							]
 						}
@@ -433,13 +378,12 @@
 						"header": [
 							{
 								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
+								"value": "application/json"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\":\"someone\",\r\n    \"password\":\"something\"\r\n}",
+							"raw": "{\n    \"username\":\"someone\",\n    \"password\":\"something\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -447,13 +391,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{BASE_URL}}/v1/user/login",
+							"raw": "{{base_url}}/v1/me/login",
 							"host": [
-								"{{BASE_URL}}"
+								"{{base_url}}"
 							],
 							"path": [
 								"v1",
-								"user",
+								"me",
 								"login"
 							]
 						}
@@ -466,19 +410,18 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{BASE_URL}}/v1/users/:username",
+							"raw": "{{base_url}}/v1/user?isId=true",
 							"host": [
-								"{{BASE_URL}}"
+								"{{base_url}}"
 							],
 							"path": [
 								"v1",
-								"users",
-								":username"
+								"user"
 							],
-							"variable": [
+							"query": [
 								{
-									"key": "username",
-									"value": null
+									"key": "isId",
+									"value": "true"
 								}
 							]
 						}
@@ -486,34 +429,33 @@
 					"response": []
 				},
 				{
-					"name": "Upload Avatar",
+					"name": "Update User",
 					"request": {
-						"method": "POST",
+						"method": "PATCH",
 						"header": [],
 						"body": {
 							"mode": "formdata",
 							"formdata": [
 								{
+									"key": "username",
+									"value": "{{username}}",
+									"type": "default"
+								},
+								{
 									"key": "avatar",
 									"type": "file",
 									"src": "/C:/Users/khuongduy354/Pictures/7d443591b2d8e85df36b78def89ec8ba.jpg"
-								},
-								{
-									"key": "username",
-									"value": "",
-									"type": "text"
 								}
 							]
 						},
 						"url": {
-							"raw": "{{BASE_URL}}/v1/users/avatar",
+							"raw": "{{base_url}}/v1/me",
 							"host": [
-								"{{BASE_URL}}"
+								"{{base_url}}"
 							],
 							"path": [
 								"v1",
-								"users",
-								"avatar"
+								"me"
 							]
 						}
 					},
@@ -522,44 +464,23 @@
 			]
 		},
 		{
-			"name": "Comments",
+			"name": "Comment",
 			"item": [
 				{
 					"name": "Downvote Comment",
 					"request": {
 						"method": "POST",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"author\":\"username\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
 						"url": {
-							"raw": "{{BASE_URL}}/v1/comments/:comment_id/downvote?postId={{postId}}",
+							"raw": "{{base_url}}/v1/comments/%7B%7Bcomment_id%7D%7D/downvote",
 							"host": [
-								"{{BASE_URL}}"
+								"{{base_url}}"
 							],
 							"path": [
 								"v1",
 								"comments",
-								":comment_id",
+								"%7B%7Bcomment_id%7D%7D",
 								"downvote"
-							],
-							"query": [
-								{
-									"key": "postId",
-									"value": "{{postId}}"
-								}
-							],
-							"variable": [
-								{
-									"key": "comment_id",
-									"value": null
-								}
 							]
 						}
 					},
@@ -571,26 +492,14 @@
 						"method": "PATCH",
 						"header": [],
 						"url": {
-							"raw": "{{BASE_URL}}/v1/comments/:comment_id?postId={{postId}}",
+							"raw": "{{base_url}}/v1/comments/%7B%7Bcomment_id%7D%7D",
 							"host": [
-								"{{BASE_URL}}"
+								"{{base_url}}"
 							],
 							"path": [
 								"v1",
 								"comments",
-								":comment_id"
-							],
-							"query": [
-								{
-									"key": "postId",
-									"value": "{{postId}}"
-								}
-							],
-							"variable": [
-								{
-									"key": "comment_id",
-									"value": null
-								}
+								"%7B%7Bcomment_id%7D%7D"
 							]
 						}
 					},
@@ -603,7 +512,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n     \"author\":\"username\"\r\n}",
+							"raw": "{\n     \"author\":\"username\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -611,27 +520,15 @@
 							}
 						},
 						"url": {
-							"raw": "{{BASE_URL}}/v1/comments/:comment_id/upvote?postId={{postId}}",
+							"raw": "{{base_url}}/v1/comments/%7B%7Bcomment_id%7D%7D/upvote",
 							"host": [
-								"{{BASE_URL}}"
+								"{{base_url}}"
 							],
 							"path": [
 								"v1",
 								"comments",
-								":comment_id",
+								"%7B%7Bcomment_id%7D%7D",
 								"upvote"
-							],
-							"query": [
-								{
-									"key": "postId",
-									"value": "{{postId}}"
-								}
-							],
-							"variable": [
-								{
-									"key": "comment_id",
-									"value": null
-								}
 							]
 						}
 					},
@@ -641,10 +538,15 @@
 					"name": "Comment post",
 					"request": {
 						"method": "POST",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}"
+							}
+						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"author\":\"username\",\r\n    \"content\":\"asdfs\"\r\n}",
+							"raw": "{\n    \"content\":\"asdfs\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -652,21 +554,15 @@
 							}
 						},
 						"url": {
-							"raw": "{{BASE_URL}}/v1/post/:post_id/comment",
+							"raw": "{{base_url}}/v1/posts/%7B%7Bpost_id%7D%7D/comment",
 							"host": [
-								"{{BASE_URL}}"
+								"{{base_url}}"
 							],
 							"path": [
 								"v1",
-								"post",
-								":post_id",
+								"posts",
+								"%7B%7Bpost_id%7D%7D",
 								"comment"
-							],
-							"variable": [
-								{
-									"key": "post_id",
-									"value": null
-								}
 							]
 						}
 					},
@@ -678,21 +574,14 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{BASE_URL}}/v1/post/comment/:comment_id",
+							"raw": "{{base_url}}/v1/comments/%7B%7Bcomment_id%7D%7D",
 							"host": [
-								"{{BASE_URL}}"
+								"{{base_url}}"
 							],
 							"path": [
 								"v1",
-								"post",
-								"comment",
-								":comment_id"
-							],
-							"variable": [
-								{
-									"key": "comment_id",
-									"value": null
-								}
+								"comments",
+								"%7B%7Bcomment_id%7D%7D"
 							]
 						}
 					},
