@@ -31,7 +31,7 @@ const createPost = async (createPostProp: createPostProp) => {
     const post = await Post.create({
       title,
       author: author._id,
-      subreddit: subreddit.subredditName,
+      subreddit: subreddit._id,
       textSubmission,
     });
     author.posts = author.posts.concat(post._id);

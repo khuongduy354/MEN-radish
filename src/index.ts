@@ -21,7 +21,6 @@ app.listen(PORT, () => {
 // Error response
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
   err && errorHandler.handleError(err, res);
-  !errorHandler.isTrustedError(err) && process.exit(1);
 });
 
 //uncaught error/rejection

@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 import { IPost } from "../types/IPost";
 import { Comment } from "./comment.model";
 
-const postSchema = new mongoose.Schema(
+const postSchema = new mongoose.Schema<IPost>(
   {
     title: {
       type: String,
@@ -10,11 +10,7 @@ const postSchema = new mongoose.Schema(
       maxlength: 100,
       trim: true,
     },
-    textSubmission: {
-      type: String,
-      trim: true,
-    },
-    linkSubmission: {
+    description: {
       type: String,
       trim: true,
     },
