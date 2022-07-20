@@ -1,5 +1,4 @@
 import { NextFunction, Request, Response } from "express";
-import { User } from "../models/user.model";
 import { Post } from "../models/post.model";
 import { PostService } from "../service/post.service";
 
@@ -121,13 +120,13 @@ const downvotePost = async (
 };
 
 export default {
-  getPostsOnSearch,
-  getAllPosts,
+  getPostsOnSearch, // wait for ranking
+  getAllPosts, //done
   createPost, //☑️
   updatePost, //☑️
   deletePost, //☑️
   getPost, // ☑️
-  getSubscribedPosts, //☑️
+  getSubscribedPosts, //done
   downvotePost, //☑️
   upvotePost, //☑️
 };
