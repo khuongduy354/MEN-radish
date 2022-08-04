@@ -3,12 +3,12 @@ import { Response, Request, NextFunction } from "express";
 const postComment = async (req: Request, res: Response, next: NextFunction) => {
   try {
     //prepare
-    const { post_id } = req.params;
+    const { postId } = req.params;
     const { content } = req.body;
     const username = req.username;
     //pass to service layer
     const post = await CommentService.createComment({
-      post_id,
+      postId,
       content,
       username,
     });

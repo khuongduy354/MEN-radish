@@ -60,16 +60,6 @@ const getUser = async (req: Request, res: Response, next: NextFunction) => {
   }
 };
 
-const uploadAvatar = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
-  try {
-  } catch (e) {
-    res.status(500).json({ error: e });
-  }
-};
 const updateUser = async (req: Request, res: Response, next: NextFunction) => {
   try {
   } catch (e) {
@@ -80,7 +70,6 @@ const updateUser = async (req: Request, res: Response, next: NextFunction) => {
 export default {
   signupAccount, //☑️
   getUser, //☑️
-  uploadAvatar,
   updateUser,
   signInAccount, //☑️
 };

@@ -1,12 +1,13 @@
 import { Router } from "express";
 const router = Router();
+import { SubredditController } from "../controllers/subreddit.controller";
 
-router.get("/subreddits");
-router.get("/subreddit/:subName");
+router.get("/subreddits", SubredditController.getAllSubreddits);
+router.get("/subreddits/:subredditId", SubredditController.getSubredditById);
 
-router.put("/subreddit/:subName");
+router.patch("/subreddits/:subredditId", SubredditController.updateSubreddit);
 
-router.post("/subreddit");
-router.post("/subreddit/subscribe/:subName");
+router.post("/subreddit", SubredditController.createSubreddit);
+// router.post("/subreddits/:subredditId", SubredditController.subscribeSubreddit);
 
 export default router;

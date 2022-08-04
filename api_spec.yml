@@ -1,0 +1,430 @@
+openapi: 3.0.0
+info:
+  title: Radish
+  version: 1.0.0
+servers:
+  - url: http://{{base_url}}
+tags:
+  - name: Post
+  - name: Subreddit
+  - name: User
+  - name: Comment
+paths:
+  /v1/posts:
+    get:
+      tags:
+        - Post
+      summary: Get all posts
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /v1/post/search:
+    get:
+      tags:
+        - Post
+      summary: Get posts on search
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /v1/posts/{post_id}:
+    get:
+      tags:
+        - Post
+      summary: Get one detailed post
+      parameters:
+        - name: post_id
+          in: path
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    delete:
+      tags:
+        - Post
+      summary: Delete post
+      parameters:
+        - name: post_id
+          in: path
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /v1/me/posts/subscribed:
+    get:
+      tags:
+        - Post
+      summary: Get subscribed posts
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: token here
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /v1/post:
+    post:
+      tags:
+        - Post
+      summary: Create new post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                token: ''
+                title: ''
+                subreddit_id: '{{subreddit_id}}'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /v1/post/{post_id}:
+    put:
+      tags:
+        - Post
+      summary: Update post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                token: token
+      parameters:
+        - name: post_id
+          in: path
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /v1/post/{post_id}/upvote:
+    post:
+      tags:
+        - Post
+      summary: Upvote post
+      requestBody:
+        content: {}
+      parameters:
+        - name: post_id
+          in: path
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /v1/post/{post_id}/downvote:
+    post:
+      tags:
+        - Post
+      summary: Downvote post
+      requestBody:
+        content: {}
+      parameters:
+        - name: post_id
+          in: path
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /v1/subreddits:
+    get:
+      tags:
+        - Subreddit
+      summary: Get all subreddits
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /v1/subreddit/{subreddit_id}:
+    get:
+      tags:
+        - Subreddit
+      summary: Get one detailed subreddit
+      parameters:
+        - name: subreddit_id
+          in: path
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    patch:
+      tags:
+        - Subreddit
+      summary: Update subreddit
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                token: token
+                description: ''
+      parameters:
+        - name: subreddit_id
+          in: path
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /v1/subreddit:
+    post:
+      tags:
+        - Subreddit
+      summary: Create new subreddit
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                token: ''
+                name: ''
+                description: ''
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /v1/subreddits/{subreddit_id}:
+    post:
+      tags:
+        - Subreddit
+      summary: Subscribe subreddit
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                token: ''
+      parameters:
+        - name: subreddit_id
+          in: path
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /v1/me/signup:
+    post:
+      tags:
+        - User
+      summary: Signup
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                username: someone
+                password: something
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /v1/me/login:
+    post:
+      tags:
+        - User
+      summary: Login
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                username: someone
+                password: something
+      parameters:
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /v1/user:
+    get:
+      tags:
+        - User
+      summary: Get User
+      parameters:
+        - name: isId
+          in: query
+          schema:
+            type: boolean
+          example: 'true'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /v1/me:
+    patch:
+      tags:
+        - User
+      summary: Update User
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                  example: '{{username}}'
+                avatar:
+                  type: string
+                  format: binary
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /v1/comments/{comment_id}/downvote:
+    post:
+      tags:
+        - Comment
+      summary: Downvote Comment
+      requestBody:
+        content: {}
+      parameters:
+        - name: comment_id
+          in: path
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /v1/comments/{comment_id}:
+    patch:
+      tags:
+        - Comment
+      summary: Edit comment
+      requestBody:
+        content: {}
+      parameters:
+        - name: comment_id
+          in: path
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    delete:
+      tags:
+        - Comment
+      summary: Delete comment
+      parameters:
+        - name: comment_id
+          in: path
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /v1/comments/{comment_id}/upvote:
+    post:
+      tags:
+        - Comment
+      summary: Upvote comment
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                author: username
+      parameters:
+        - name: comment_id
+          in: path
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /v1/posts/{post_id}/comment:
+    post:
+      tags:
+        - Comment
+      summary: Comment post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                content: asdfs
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: '{{token}}'
+        - name: post_id
+          in: path
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}

@@ -1,0 +1,593 @@
+{
+	"info": {
+		"_postman_id": "bfc4004b-8e87-4fae-87a4-b44b57a301ff",
+		"name": "Radish",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "17922492"
+	},
+	"item": [
+		{
+			"name": "Post",
+			"item": [
+				{
+					"name": "Get all posts",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/v1/posts",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"v1",
+								"posts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get posts on search",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/v1/post/search",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"v1",
+								"post",
+								"search"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get one detailed post",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/v1/posts/%7B%7Bpost_id%7D%7D",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"v1",
+								"posts",
+								"%7B%7Bpost_id%7D%7D"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get subscribed posts",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "token here"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/v1/me/posts/subscribed",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"v1",
+								"me",
+								"posts",
+								"subscribed"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create new post",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"token\":\"\",\n    \"title\":\"\",\n    \"subreddit_id\":\"{{subreddit_id}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/v1/post",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"v1",
+								"post"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update post",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"token\":\"token\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/v1/post/%7B%7Bpost_id%7D%7D",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"v1",
+								"post",
+								"%7B%7Bpost_id%7D%7D"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete post",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"token\":\"\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/v1/posts/%7B%7Bpost_id%7D%7D",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"v1",
+								"posts",
+								"%7B%7Bpost_id%7D%7D"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Upvote post",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/v1/post/%7B%7Bpost_id%7D%7D/upvote",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"v1",
+								"post",
+								"%7B%7Bpost_id%7D%7D",
+								"upvote"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Downvote post",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/v1/post/%7B%7Bpost_id%7D%7D/downvote",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"v1",
+								"post",
+								"%7B%7Bpost_id%7D%7D",
+								"downvote"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Subreddit",
+			"item": [
+				{
+					"name": "Get all subreddits",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/v1/subreddits",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"v1",
+								"subreddits"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get one detailed subreddit",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/v1/subreddit/%7B%7Bsubreddit_id%7D%7D",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"v1",
+								"subreddit",
+								"%7B%7Bsubreddit_id%7D%7D"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create new subreddit",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"token\":\"\",\n    \"name\":\"\",\n    \"description\":\"\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/v1/subreddit",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"v1",
+								"subreddit"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update subreddit",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"token\":\"token\",\n    \"description\":\"\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/v1/subreddit/%7B%7Bsubreddit_id%7D%7D",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"v1",
+								"subreddit",
+								"%7B%7Bsubreddit_id%7D%7D"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Subscribe subreddit",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"token\": \"\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/v1/subreddits/%7B%7Bsubreddit_id%7D%7D",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"v1",
+								"subreddits",
+								"%7B%7Bsubreddit_id%7D%7D"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Signup",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\":\"someone\",\n    \"password\":\"something\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/v1/me/signup",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"v1",
+								"me",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\":\"someone\",\n    \"password\":\"something\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/v1/me/login",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"v1",
+								"me",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get User",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/v1/user?isId=true",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"v1",
+								"user"
+							],
+							"query": [
+								{
+									"key": "isId",
+									"value": "true"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update User",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "username",
+									"value": "{{username}}",
+									"type": "default"
+								},
+								{
+									"key": "avatar",
+									"type": "file",
+									"src": "/C:/Users/khuongduy354/Pictures/7d443591b2d8e85df36b78def89ec8ba.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/v1/me",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"v1",
+								"me"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Comment",
+			"item": [
+				{
+					"name": "Downvote Comment",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/v1/comments/%7B%7Bcomment_id%7D%7D/downvote",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"v1",
+								"comments",
+								"%7B%7Bcomment_id%7D%7D",
+								"downvote"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit comment",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/v1/comments/%7B%7Bcomment_id%7D%7D",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"v1",
+								"comments",
+								"%7B%7Bcomment_id%7D%7D"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Upvote comment",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n     \"author\":\"username\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/v1/comments/%7B%7Bcomment_id%7D%7D/upvote",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"v1",
+								"comments",
+								"%7B%7Bcomment_id%7D%7D",
+								"upvote"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Comment post",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"content\":\"asdfs\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/v1/posts/%7B%7Bpost_id%7D%7D/comment",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"v1",
+								"posts",
+								"%7B%7Bpost_id%7D%7D",
+								"comment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete comment",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/v1/comments/%7B%7Bcomment_id%7D%7D",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"v1",
+								"comments",
+								"%7B%7Bcomment_id%7D%7D"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

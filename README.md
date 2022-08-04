@@ -1,34 +1,29 @@
-# Todo 
-- User route 
+# Todo
 
-### Features 
-- implement cloudinary buffer + multer 
-- implement pagination
-- implement ranking 
+[] implement cloudinary buffer + multer for post, user avatar
 
+- This project is made for the purpose of learning, therefore only focus on feature, concepts, and ignore small details
 
-# Checklist 
-[x] Error Handling 
+# Features
 
-[ ] Testing
+- Auth DONE
+- Ranking algo
+- Database search
+- Cloudinary to store posts images,avatar,videos
+- Pagination of posts
+- Documentation, simple API design in spec
+- Centralized error handling DONE
 
-[ ] Documentation
-
-<br>
-
-[ ] Post endpoints 
-
-[ ] Subreddit endpoints 
-
-[ ] User endpoints 
-
-[x] Comment endpoints
+- Basic CRUD is mostly ignored
 
 # Learned
-[Source](https://github.com/amand33p/reddish#reddish---a-reddit-clone---mern)
-- index.d.ts includes custom property for request 
-- Use jwt for auth
-- typing for model 
 
-- use save() for updating mongodb, lean() for query, populate() for references  
+[Source](https://github.com/amand33p/reddish#reddish---a-reddit-clone---mern)
+
+- index.d.ts includes custom property for request
+- Use jwt for auth
+- typing for model
+- use asyncHandler to avoid try catch
+
+- use save() for updating mongodb, lean() for query, populate() for references
 - mongodb query operator ($)

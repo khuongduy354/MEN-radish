@@ -14,9 +14,9 @@ const getAllSubreddits = async () => {
   }
 };
 
-const getSubredditByName = async (name: string) => {
+const getSubredditById = async (id: string) => {
   try {
-    const subreddit = await Subreddit.findOne({ name });
+    const subreddit = await Subreddit.findById(id);
     if (!subreddit) {
       throw new AppError(404, "Subreddit not found");
     }
@@ -65,10 +65,10 @@ const updateSubreddit = async (
     throw e;
   }
 };
-const subscribeSubreddit = async (username: string, subredditName: string) => {
+const subscribeSubreddit = async (username: string, subredditId: ObjectId) => {
   try {
     //prepare
-    const subreddit = await Subreddit.findOne({ subredditName });
+    const subreddit = await Subreddit.findById(subredditId);
     const user = await User.findOne({ username });
 
     //TODO:db error handling
@@ -88,7 +88,7 @@ const subscribeSubreddit = async (username: string, subredditName: string) => {
 
 export const SubredditService = {
   getAllSubreddits,
-  getSubredditByName,
+  getSubredditById,
   createSubreddit,
   updateSubreddit,
   subscribeSubreddit,

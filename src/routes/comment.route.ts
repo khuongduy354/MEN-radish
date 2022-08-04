@@ -1,14 +1,17 @@
+import { auth } from "./../middlewares/auth";
 import { Router } from "express";
+import { CommentController } from "../controllers/comment.controller";
 const router = Router();
 
-router.route("/post/comment");
+router.post(
+  "/comments/:comment_id/downvote",
+  CommentController.downvoteComment
+);
+router.post("/comments/:comment_id/upvote", CommentController.upvoteComment);
+router.post("/posts/:postId/comment", auth, CommentController.postComment);
 
-router.post("/downvote/:comment_id");
-router.post("/upvote/:comment_id");
-router.post("/:video_id");
+// router.put("/comments/:commentId",CommentController.updateComment);
 
-router.put("/comment/comment_:id");
-
-router.delete("/:comment_id");
+// router.delete("/comments/:commentId",CommentController.);
 
 export default router;

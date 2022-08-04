@@ -4,8 +4,7 @@ import { IComment } from "./IComment";
 export interface IPost {
   _id: ObjectId;
   title: String;
-  textSubmission: String;
-  linkSubmission: String;
+  description: String;
   imageLink: String;
   category: String;
   subreddit: ObjectId;
