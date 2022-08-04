@@ -1,6 +1,7 @@
 import { AppError } from "./../error";
 import { Post } from "../models/post.model";
 import { Subreddit } from "../models/subreddit.model";
+import { paginatePages } from "../helper/paginatePages";
 import { User } from "../models/user.model";
 
 type createPostProp = {
@@ -45,12 +46,12 @@ const createPost = async (createPostProp: createPostProp) => {
     throw e;
   }
 };
-const getPost = async (id: number) => {
+const getPost = async (id: number, page: number, itemsPerPage: number) => {
   try {
     const post = await Post.findById(id)
       .populate("author", "username")
-      .populate("subreddit", "subredditName")
-      .populate("comments");
+      .populate("subreddit", "subredditName");
+
     return post;
   } catch (e) {
     throw e;
@@ -166,22 +167,36 @@ const downvotePost = async (id: number, username: string) => {
     throw e;
   }
 };
-const getSubscribedPosts = async (username: string) => {
+const getSubscribedPosts = async (
+  username: string,
+  currentPage: number,
+  perPage: number
+) => {
   try {
     //prepare data
     const user = await User.findOne({ username }).populate("subscribedSubs");
     if (!user) throw new AppError(404, "User does not exist");
 
-    const posts = await Post.find({
+    const postCounts = await Post.countDocuments();
+    let paginatedData = paginatePages(currentPage, perPage, postCounts);
+
+    const tempPosts = await Post.find({
       _id: { $in: user.subscribedSubs },
     })
       .select("-comments")
+      .skip(paginatedData.skipPages)
       .populate("author", "username")
       .populate("subreddit", "subredditName");
 
-    if (!posts) throw new AppError(404, "Post does not exist");
+    if (!tempPosts) throw new AppError(404, "Post does not exist");
 
-    return posts;
+    const paginatedPosts = {
+      current: tempPosts,
+      previous: paginatedData.previousPage,
+      next: paginatedData.nextPage,
+    };
+
+    return paginatedPosts;
   } catch (e) {
     throw e;
   }
