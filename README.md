@@ -9,13 +9,12 @@
 - Auth DONE
 - Ranking algo
 - Database search
-- Cloudinary to store posts images,avatar,videos
-- Pagination of posts     DONE 
-- Documentation, simple API design in spec   
+- Cloudinary to store posts images,avatar,videos DONE
+- Pagination of posts DONE
+- Documentation, simple API design in spec
 - Centralized error handling DONE
 
 - Basic CRUD is mostly ignored
-
 
 # Learned
 
