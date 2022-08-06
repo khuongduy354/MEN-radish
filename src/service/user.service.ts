@@ -32,9 +32,15 @@ const signInAccount = async (username: string, password: string) => {
   }
 };
 
-const updateUser = async () => {
+const updateUser = async (avatarUrl: string, userId: number) => {
   try {
-  } catch (e) {}
+    const user = await User.findByIdAndUpdate(userId, {
+      avatar: { imageLink: avatarUrl },
+    });
+    return user;
+  } catch (e) {
+    throw e;
+  }
 };
 const getUser = async (query: number | string) => {
   try {

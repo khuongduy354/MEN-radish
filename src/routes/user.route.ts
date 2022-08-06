@@ -10,5 +10,5 @@ const upload = multer({ storage });
 
 router.post("/me/signup", userController.signupAccount);
 router.post("/me/login", userController.signInAccount);
-// router.post("/user/avatar", upload.single("avatar"), userController.updateUser);
+router.put("/user/avatar", upload.single("avatar"), userController.updateUser);
 export default router;
