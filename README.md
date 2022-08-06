@@ -8,10 +8,10 @@
 
 - Auth DONE
 - Ranking algo
-- Database search
+<!-- - Database search   -->
 - Cloudinary to store posts images,avatar,videos DONE
 - Pagination of posts DONE
-- Documentation, simple API design in spec
+<!-- - Documentation, simple API design in spec -->
 - Centralized error handling DONE
 
 - Basic CRUD is mostly ignored
@@ -27,3 +27,9 @@
 
 - use save() for updating mongodb, lean() for query, populate() for references
 - mongodb query operator ($)
+
+# Routes
+
+- CRUD posts + upvote/downvote
+- C comments + upvote/downvote
+- SignIn/SignUp users + get
