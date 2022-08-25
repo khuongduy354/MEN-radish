@@ -1,9 +1,7 @@
-import { AppError, errorHandler } from "./error";
-import { logger } from "./config/logger";
-//boostrap expressjs
+import { errorHandler } from "./error";
 import express, { NextFunction, Request, Response } from "express";
 import "dotenv/config";
-import mongoose from "mongoose";
+import { logger } from "./config/logger";
 
 const PORT = process.env.PORT || 3000;
 const app = express();
