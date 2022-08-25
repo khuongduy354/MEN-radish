@@ -22,7 +22,8 @@
 - typing for model
 - use asyncHandler to avoid try catch
 
-### Specific Tools 
+
+## Tools Specific
 - use save() for updating mongodb, lean() for query, populate() for references
 - mongodb query operator ($)
 
