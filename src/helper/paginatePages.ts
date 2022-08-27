@@ -10,6 +10,7 @@ export const paginatePages = (
     currentPagePosts: [],
     nextPage: currentPage == numberOfPages ? numberOfPages : currentPage + 1,
     numberOfPages,
+    posts: null,
     skipPages: perPage * (currentPage - 1),
   };
 };
