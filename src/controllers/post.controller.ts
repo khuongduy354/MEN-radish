@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import { Post } from "../models/post.model";
 import { PostService } from "../service/post.service";
-
+import { paginatePages } from "../helper/paginatePages";
 const createPost = async (req: Request, res: Response, next: NextFunction) => {
   try {
     //prepare
@@ -23,9 +23,13 @@ const createPost = async (req: Request, res: Response, next: NextFunction) => {
 const getPost = async (req: Request, res: Response) => {
   try {
     //prepare data
-    const { id } = req.params;
+    const { id, page, itemsPerPage } = req.params;
     //pass to service
-    const post = await PostService.getPost(Number(id));
+    const post = await PostService.getPost(
+      Number(id),
+      Number(page),
+      Number(itemsPerPage)
+    );
 
     res.status(200).json({ data: post });
   } catch (e) {}
@@ -41,9 +45,18 @@ const getAllPosts = async (req: Request, res: Response) => {
 };
 const getPostsOnSearch = async (req: Request, res: Response) => {
   try {
-    const { category } = req.query;
-    const posts = await Post.find({ category: category });
-    res.status(200).json({ data: posts });
+    const { category, itemsPerPage, page } = req.query;
+    const count = await Post.countDocuments({ category: category });
+    let paginatedPosts = paginatePages(
+      Number(page),
+      Number(itemsPerPage),
+      count
+    );
+    paginatedPosts.posts = await Post.find({ category: category })
+      .limit(Number(itemsPerPage))
+      .skip(paginatedPosts.skipPages)
+      .lean();
+    res.status(200).json({ data: paginatedPosts });
   } catch (e) {}
 };
 
@@ -81,9 +94,13 @@ const getSubscribedPosts = async (
   try {
     //prepare data
     const username = req.username;
-
+    const { page, itemsPerPage } = req.query;
     //pass to service
-    const posts = await PostService.getSubscribedPosts(username);
+    const posts = await PostService.getSubscribedPosts(
+      username,
+      Number(page),
+      Number(itemsPerPage)
+    );
 
     res.status(200).json({ data: posts });
   } catch (e) {
@@ -120,7 +137,7 @@ const downvotePost = async (
 };
 
 export default {
-  getPostsOnSearch, // wait for ranking
+  getPostsOnSearch, // done
   getAllPosts, //done
   createPost, //☑️
   updatePost, //☑️

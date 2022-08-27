@@ -4,7 +4,7 @@ import postController from "../controllers/post.controller";
 const router = Router();
 
 router.get("/posts", postController.getAllPosts);
-// router.get("/posts/search?q=adasd", postController.getPostsOnSearch);
+router.get("/posts", postController.getPostsOnSearch);
 router.get("/posts/:id", postController.getPost);
 router.get("me/posts/subscribed", postController.getSubscribedPosts);
 
