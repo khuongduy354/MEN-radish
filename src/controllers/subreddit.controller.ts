@@ -62,9 +62,27 @@ const createSubreddit = async (
     next(e);
   }
 };
+const subscribeSubreddit = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const username = req.username;
+    const { subredditId } = req.params;
+    const subreddit = await SubredditService.subscribeSubreddit(
+      username,
+      Number(subredditId)
+    );
+    res.status(200).json({ data: subreddit });
+  } catch (e) {
+    next(e);
+  }
+};
 export const SubredditController = {
   getAllSubreddits,
   getSubredditById,
   createSubreddit,
   updateSubreddit,
+  subscribeSubreddit,
 };

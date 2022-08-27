@@ -65,13 +65,12 @@ const updateSubreddit = async (
     throw e;
   }
 };
-const subscribeSubreddit = async (username: string, subredditId: ObjectId) => {
+const subscribeSubreddit = async (username: string, subredditId: number) => {
   try {
     //prepare
     const subreddit = await Subreddit.findById(subredditId);
     const user = await User.findOne({ username });
 
-    //TODO:db error handling
     //ensure exists
     if (!subreddit) throw new AppError(404, "Subreddit not found");
     if (!user) throw new AppError(404, "User not found");
