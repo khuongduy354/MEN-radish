@@ -1,20 +1,20 @@
 
 # Radish - A reddit clone API  
 - This project is made for the purpose of learning, only focus on feature, ignore some implementations. 
-
+- Documentation included in both Postman and OpenAPI. 
 # Todo
 
 
 # Features
-
-- Auth DONE
-- Ranking algo
-- Cloudinary to store posts images,avatar,videos DONE
-- Pagination of posts DONE
-- Centralized error handling DONE
-
+- Auth JWT 
+- Cloudinary 
+- Pagination 
+- Centralized error handling 
+- CRUDs posts,subreddits,comments
+# Notes 
+- some basic CRUD are not implemented. 
+- api not tested
 # Learned
-
 [Source](https://github.com/amand33p/reddish#reddish---a-reddit-clone---mern)
 
 - index.d.ts includes custom property for request
