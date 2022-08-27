@@ -8,7 +8,7 @@ const postComment = async (req: Request, res: Response, next: NextFunction) => {
     const username = req.username;
     //pass to service layer
     const post = await CommentService.createComment({
-      postId,
+      post_id: postId,
       content,
       username,
     });
@@ -25,12 +25,12 @@ const upvoteComment = async (
 ) => {
   try {
     //prepare
-    const { comment_id, post_id } = req.params;
+    const { id, post_id } = req.params;
     const username = req.username;
 
     //pass to service layer
     const post = await CommentService.upvoteComment({
-      comment_id,
+      id: Number(id),
       post_id,
       username,
     });
@@ -49,11 +49,11 @@ const downvoteComment = async (
 ) => {
   try {
     //prepare
-    const { comment_id, post_id } = req.params;
+    const { id, post_id } = req.params;
     const username = req.username;
     //pass to service layer
     const post = await CommentService.downvoteComment({
-      comment_id,
+      id: Number(id),
       post_id,
       username,
     });

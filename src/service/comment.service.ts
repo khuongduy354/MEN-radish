@@ -8,12 +8,12 @@ type createCommentProp = {
   username: string;
 };
 type upvoteCommentProp = {
-  comment_id: string;
+  id: number;
   post_id: string;
   username: string;
 };
 type downvoteCommentProp = {
-  comment_id: string;
+  id: number;
   post_id: string;
   username: string;
 };
@@ -55,10 +55,10 @@ const createComment = async (createCommentProp: createCommentProp) => {
 const upvoteComment = async (upvoteCommentProp: upvoteCommentProp) => {
   try {
     //prepare
-    const { comment_id, post_id, username } = upvoteCommentProp;
+    const { id, post_id, username } = upvoteCommentProp;
     const post = await Post.findById(post_id).populate("comments");
     const user = await User.findOne({ username });
-    const targetComment = await Comment.findById(comment_id);
+    const targetComment = await Comment.findById(id);
 
     //ensure exists
     if (!post) {
@@ -92,7 +92,7 @@ const upvoteComment = async (upvoteCommentProp: upvoteCommentProp) => {
 
     //update post
     const commentIndex = post.comments.findIndex(
-      (comment) => comment._id.toString() === comment_id
+      (comment) => Number(comment._id) === id
     );
     post.comments[commentIndex] = targetComment;
     await post.save();
@@ -105,10 +105,10 @@ const upvoteComment = async (upvoteCommentProp: upvoteCommentProp) => {
 
 const downvoteComment = async (downvoteCommentProp: downvoteCommentProp) => {
   try {
-    const { comment_id, post_id, username } = downvoteCommentProp;
+    const { id, post_id, username } = downvoteCommentProp;
     const post = await Post.findById(post_id).populate("comments");
     const user = await User.findOne({ username });
-    const targetComment = await Comment.findById(comment_id);
+    const targetComment = await Comment.findById(id);
 
     //ensure exists
     if (!post) {
@@ -141,7 +141,7 @@ const downvoteComment = async (downvoteCommentProp: downvoteCommentProp) => {
 
     //update post
     const commentIndex = post.comments.findIndex(
-      (comment) => comment._id.toString() === comment_id
+      (comment) => Number(comment._id) === id
     );
     post.comments[commentIndex] = targetComment;
     await post.save();
