@@ -8,12 +8,12 @@ router.get("/posts", postController.getPostsOnSearch);
 router.get("/posts/:id", postController.getPost);
 router.get("me/posts/subscribed", postController.getSubscribedPosts);
 
-router.post("/post", postController.createPost);
-router.post("/posts/:id/downvote", postController.downvotePost);
+router.post("/post", auth, postController.createPost);
+router.post("/posts/:id/downvote", auth, postController.downvotePost);
 router.post("/post/:id/upvote", auth, postController.upvotePost);
 
-router.put("/posts/:id", postController.updatePost);
+router.put("/posts/:id", auth, postController.updatePost);
 
-router.delete("/posts/:id", postController.deletePost);
+router.delete("/posts/:id", auth, postController.deletePost);
 
 export default router;
