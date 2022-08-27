@@ -6,8 +6,7 @@ const router = Router();
 //store multer buffer
 const storage = multer.memoryStorage();
 const upload = multer({ storage });
-// router.get("/user", userController.getUser);
-
+router.get("/user", userController.getUser);
 router.post("/me/signup", userController.signupAccount);
 router.post("/me/login", userController.signInAccount);
 router.put("/user/avatar", upload.single("avatar"), userController.updateUser);

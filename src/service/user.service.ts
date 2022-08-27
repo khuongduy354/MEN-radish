@@ -42,15 +42,10 @@ const updateUser = async (avatarUrl: string, userId: number) => {
     throw e;
   }
 };
-const getUser = async (query: number | string) => {
+const getUser = async (query: number) => {
   try {
-    //prepare query
-    const userQuery = {
-      [typeof query === "number" ? "_id" : "username"]: query,
-    };
-
     //get user
-    const user = await User.findOne(userQuery).lean();
+    const user = await User.findById(query).lean();
     if (!user) throw new AppError(404, "User not found");
 
     return user;

@@ -41,18 +41,9 @@ const signInAccount = async (
 const getUser = async (req: Request, res: Response, next: NextFunction) => {
   try {
     //prepare query
-    const { isId, userQuery } = req.query;
-    let query: string | number;
-
-    if (isId && !isNaN(Number(userQuery))) {
-      query = Number(userQuery);
-    } else if (!isId && userQuery) {
-      query = userQuery.toString();
-    } else {
-      throw new AppError(400, "Invalid query");
-    }
+    const { userId } = req.query;
     //pass to service
-    const user = await UserService.getUser(query);
+    const user = await UserService.getUser(Number(userId));
 
     //response
     return res.status(200).json({ data: user });
