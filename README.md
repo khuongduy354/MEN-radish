@@ -25,6 +25,8 @@
 - use save() for updating mongodb, lean() for query, populate() for references
 - mongodb query operator ($)
 
+![db_diagram](radish-db-diagram(3).png)
+
 ### db design decisions 
 - Comment reply is 1-1 rel to itself  
 
