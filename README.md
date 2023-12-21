@@ -21,9 +21,22 @@
 - Use jwt for auth
 - typing for model
 - use asyncHandler to avoid try catch
-
-
 ## Tools Specific
 - use save() for updating mongodb, lean() for query, populate() for references
 - mongodb query operator ($)
+
+### db design decisions 
+- Comment reply is 1-1 rel to itself  
+
+Extra field on User: subreddits, posts
+- user can query his subscribed subreddit, created post  
+
+notes: 
+- relationship and sql diagram differs, in many to many, relationship table, should 
+i have both fields?  
+- notice extra fields in reflection
+
+
+
+
 
